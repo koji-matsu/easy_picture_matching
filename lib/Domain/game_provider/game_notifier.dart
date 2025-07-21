@@ -10,8 +10,10 @@ class GameNotifier extends _$GameNotifier {
   @override
   GameState build() {
     ref.read(historyNotifierProvider.notifier).updateTotalPlayCount();
-    final List<PictMatchingModel> pictMatchingModel = List.generate(PictEnum.values.length, (i) => PictMatchingModel(pictEnum: PictEnum.values[i]));
-    return GameState(pictMatchingList: pictMatchingModel + pictMatchingModel);
+    final List<PictMatchingModel> halfModel = List.generate(PictEnum.values.length, (i) => PictMatchingModel(pictEnum: PictEnum.values[i]));
+    final List<PictMatchingModel> allModel = halfModel + halfModel;
+    allModel.shuffle();
+    return GameState(pictMatchingList: allModel);
   }
 
   ///
